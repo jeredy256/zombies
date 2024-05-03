@@ -1,7 +1,16 @@
 *{
   padding: 0;
   margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
  
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.pico{
+  text-align: center;
 }
 
 .container {
@@ -20,6 +29,8 @@
 img {
   width: 150px;
   height: 150px;
+  padding: 3px;
+  box-shadow: 2px 2px 2px #333;
  
  
 }
