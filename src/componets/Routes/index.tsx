@@ -8,7 +8,7 @@ const Rotas = () => {
     return(
         <Routes>
             <Route  path="/zombies" element={<App/>} />
-            <Route path='*' element={<Error404/>} />
+            <Route path="*" element={<Error404/>} />
 
 
         </Routes>

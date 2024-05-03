@@ -1,13 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 *{
   padding: 0;
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
  
 }
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
+body{
+  background-color: #333;
+  color: #fff;
+}
 
 .pico{
   text-align: center;
@@ -15,7 +19,8 @@
 
 .container {
   display: flex;
-   margin: 1px;
+  margin: 1px;
+  max-width: 768px;
    
 }
 
@@ -26,7 +31,7 @@
 
 }
 
-img {
+ img {
   width: 150px;
   height: 150px;
   margin: 10px;
@@ -34,7 +39,7 @@ img {
   box-shadow: 2px 2px 2px #333;
  
  
-}
+} 
 
 @media screen and (max-width:  668px) {
  img{
@@ -57,21 +62,24 @@ img {
   
   }
 
-  .box {
-    text-align: center; 
-    padding: 0.5px;
-    align-items: center;
-  
+  .container {
+    display: flex;
+    margin: 1px;
+    max-width: 609px;
+     
   }
+  
 
   
 }
 
-@media screen and (min-width:  968px) {
+@media screen and (min-width:  868px) {
+  
   img{
     width: 150px;
     height: 150px;
   }
+  
 
   h4{
     font-size: 18px;
@@ -80,4 +88,4 @@ img {
     font-size: 18px;
   }
   
-}
+} 
