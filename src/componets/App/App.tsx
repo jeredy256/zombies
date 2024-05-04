@@ -3,50 +3,58 @@ import bo1 from "../../assets/bo1.jfif";
 import bo2 from "../../assets/bo2.jfif";
 import bo3 from "../../assets/bo3.jfif";
 import bit from "../../assets/bit.png"
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import { faDiscord} from '@fortawesome/free-brands-svg-icons'
 
 
 
 const App = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(false)
+  const toggleDarkMode = () =>{
+    setDarkMode(!darkMode)
+    document.body.classList.toggle('dark-mode')
 
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-    // Aqui você pode adicionar lógica para alternar entre os temas claro e escuro
-    // Por exemplo, você pode alterar as classes do body ou adicionar uma classe ao elemento raiz do aplicativo
-    if (isDarkMode) {
-      document.body.classList.remove('dark');
+  }
+  
+  const [contador, setContador] = useState<number>(0);
+
+  useEffect(() => {
+    // Verifica se já existe um contador no localStorage
+    const visitasAnteriores = localStorage.getItem('contadorVisitas');
+    
+    if (visitasAnteriores) {
+      // Se existir, atualiza o estado com o valor do localStorage
+      setContador(parseInt(visitasAnteriores));
     } else {
-      document.body.classList.add('dark');
+      // Se não existir, define o contador como 0
+      localStorage.setItem('contadorVisitas', '0');
+      setContador(0); // Aqui atualizamos o contador no estado inicial
     }
+
+    // Incrementa o contador de visitas
+    const contadorAtualizado = parseInt(visitasAnteriores || '0') + 1;
+    localStorage.setItem('contadorVisitas', contadorAtualizado.toString());
+    setContador(contadorAtualizado); // Aqui atualizamos o contador após incrementá-lo
+  }, []);
+  const resetarContador = () => {
+    localStorage.setItem('contadorVisitas', '0');
+    setContador(0);
   };
 
 
   return (
-    <div>
-      <header>
+    <div className={darkMode ?  'darck-mode' : ''}>
+      <header >
+        {/* <button onClick={toggleDarkMode}>{isDarkMode ? 'modo claro ' : 'modo escuro'}</button> */}
         <h1 className="pico">Local 
           Downloads</h1>
-          <div><label htmlFor="toggle" className="flex items-center cursor-pointer">
-      <div className="relative">
-        <input
-          id="toggle"
-          type="checkbox"
-          className="hidden"
-          checked={isDarkMode}
-          onChange={toggleDarkMode}
-        />
-        <div className="toggle__line w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
-        <div
-          className={`toggle__dot absolute w-6 h-6 bg-white rounded-full shadow inset-y-0 ${
-            isDarkMode ? 'left-4' : 'left-0'
-          }`}
-        ></div>
-      </div>
-      <div className="ml-3 text-gray-700 font-medium">Modo {isDarkMode ? 'Escuro' : 'Claro'}</div>
-    </label></div>
+          <div>
+            <button onClick={toggleDarkMode}>{darkMode ? 'modo claro ' : 'modo escuro'}</button>
+          </div>
           
       </header>
+      <button onClick={resetarContador}>reser</button>
       <div className="container">
         <div className="box">
           <a href="https://m-lyart.vercel.app/pluto_t5_full_game.torrent">
@@ -75,6 +83,16 @@ const App = () => {
 
         </div>
       </div>
+      <footer className="jere">
+        
+        <div >
+        <p>Entre em nosso servidor no Discord:</p>
+      <a href="https://discord.gg/rrddT5vTxW">
+        <FontAwesomeIcon icon={faDiscord} /> Discord
+      </a>
+        </div>
+        <p  className="picoo">Total de visitantes: {contador} </p>
+      </footer>
     </div>
   );
 };
